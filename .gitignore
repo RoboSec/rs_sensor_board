@@ -31,3 +31,4 @@
 # Debug files
 *.dSYM/
 *.su
+FW-rs_sensor_board/SW4STM32/FW-rs_sensor_board/Debug/*
