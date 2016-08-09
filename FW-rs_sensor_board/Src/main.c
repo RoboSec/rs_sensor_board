@@ -39,7 +39,8 @@
 #include "gpio.h"
 
 /* USER CODE BEGIN Includes */
-#include "leds_handler.h"
+#include "common.h"
+#include "ultrasnd_handler.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -86,12 +87,13 @@ int main(void)
 	MX_TIM3_Init();
 	MX_TIM4_Init();
 	MX_TIM5_Init();
-	MX_TIM9_Init();
 	MX_USART1_UART_Init();
 	MX_USART2_UART_Init();
+	MX_TIM11_Init();
 
 	/* USER CODE BEGIN 2 */
-
+	HAL_TIM_Base_Start_IT(&htim11); // 100 msec timer
+	initSonar( MAX_SONAR );
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -99,9 +101,19 @@ int main(void)
 	while (1)
 	{
 		/* USER CODE END WHILE */
-		HAL_Delay( 300 );
-		toggleLedNucleo();
+
 		/* USER CODE BEGIN 3 */
+		// >>>>> Sonar reading
+		triggerSonar( COUPLE_0_2);
+		HAL_Delay(49);
+		triggerSonar( COUPLE_1_3);
+		HAL_Delay(49);
+		// <<<<< Sonar reading
+
+		// >>>>> Serial Output
+		convertMeasures();
+		//sendMeasures();
+		// <<<<< Serial Output
 
 	}
 	/* USER CODE END 3 */
@@ -169,6 +181,9 @@ void Error_Handler(void)
 	/* User can add his own implementation to report the HAL error return state */
 	while (1)
 	{
+		// Led frequency 10hz
+		delayUS( 100 );
+		toggleLedNucleo();
 	}
 	/* USER CODE END Error_Handler */
 }
