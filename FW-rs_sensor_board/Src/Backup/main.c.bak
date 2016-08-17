@@ -93,8 +93,7 @@ int main(void)
 
 	/* USER CODE BEGIN 2 */
 	HAL_TIM_Base_Start_IT(&htim11); // 100 msec timer
-	initSonar( MAX_SONAR);
-	initSerOutput();
+	initSonar( MAX_SONAR );
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -183,7 +182,7 @@ void Error_Handler(void)
 	while (1)
 	{
 		// Led frequency 10hz
-		delayUS(100);
+		delayUS( 100 );
 		toggleLedNucleo();
 	}
 	/* USER CODE END Error_Handler */

@@ -75,6 +75,26 @@
 			<location>PARENT-2-PROJECT_LOC/Src/main.c</location>
 		</link>
 		<link>
+			<name>Application/User/ser_data.c</name>
+			<type>1</type>
+			<location>/home/myzhar/devel/RoboSec/Firmware/rs_sensor_board/FW-rs_sensor_board/Src/ser_data.c</location>
+		</link>
+		<link>
+			<name>Application/User/ser_data.h</name>
+			<type>1</type>
+			<location>/home/myzhar/devel/RoboSec/Firmware/rs_sensor_board/FW-rs_sensor_board/Inc/ser_data.h</location>
+		</link>
+		<link>
+			<name>Application/User/ser_handler.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/ser_handler.c</location>
+		</link>
+		<link>
+			<name>Application/User/ser_handler.h</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Inc/ser_handler.h</location>
+		</link>
+		<link>
 			<name>Application/User/stm32f4xx_hal_msp.c</name>
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/stm32f4xx_hal_msp.c</location>

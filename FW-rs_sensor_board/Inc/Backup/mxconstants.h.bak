@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
-  * @file    stm32f4xx_it.h
-  * @brief   This file contains the headers of the interrupt handlers.
+  * File Name          : mxconstants.h
+  * Description        : This file contains the common defines of the application
   ******************************************************************************
   *
   * COPYRIGHT(c) 2016 STMicroelectronics
@@ -30,40 +30,54 @@
   *
   ******************************************************************************
   */
-
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32F4xx_IT_H
-#define __STM32F4xx_IT_H
+#ifndef __MXCONSTANT_H
+#define __MXCONSTANT_H
+  /* Includes ------------------------------------------------------------------*/
 
-#ifdef __cplusplus
- extern "C" {
-#endif 
+/* USER CODE BEGIN Includes */
 
-/* Includes ------------------------------------------------------------------*/
-/* Exported types ------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/
-/* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */
+/* USER CODE END Includes */
 
-void SVC_Handler(void);
-void PendSV_Handler(void);
-void SysTick_Handler(void);
-void DMA1_Stream5_IRQHandler(void);
-void DMA1_Stream6_IRQHandler(void);
-void TIM1_BRK_TIM9_IRQHandler(void);
-void TIM1_TRG_COM_TIM11_IRQHandler(void);
-void TIM2_IRQHandler(void);
-void TIM3_IRQHandler(void);
-void TIM4_IRQHandler(void);
-void USART1_IRQHandler(void);
-void TIM5_IRQHandler(void);
-void I2C3_EV_IRQHandler(void);
-void I2C3_ER_IRQHandler(void);
+/* Private define ------------------------------------------------------------*/
 
-#ifdef __cplusplus
-}
-#endif
+#define B1_Pin GPIO_PIN_13
+#define B1_GPIO_Port GPIOC
+#define ECHO_SENS__0_Pin GPIO_PIN_0
+#define ECHO_SENS__0_GPIO_Port GPIOA
+#define ECHO_SENS__3_Pin GPIO_PIN_1
+#define ECHO_SENS__3_GPIO_Port GPIOA
+#define STATUS_LED_Pin GPIO_PIN_5
+#define STATUS_LED_GPIO_Port GPIOA
+#define ECHO_SENS__1_Pin GPIO_PIN_6
+#define ECHO_SENS__1_GPIO_Port GPIOA
+#define LIGHT_MODULATION_Pin GPIO_PIN_7
+#define LIGHT_MODULATION_GPIO_Port GPIOA
+#define TRG_SENS__0__2_Pin GPIO_PIN_0
+#define TRG_SENS__0__2_GPIO_Port GPIOB
+#define TRG_SENS__1__3_Pin GPIO_PIN_1
+#define TRG_SENS__1__3_GPIO_Port GPIOB
+#define TMS_Pin GPIO_PIN_13
+#define TMS_GPIO_Port GPIOA
+#define TCK_Pin GPIO_PIN_14
+#define TCK_GPIO_Port GPIOA
+#define SWO_Pin GPIO_PIN_3
+#define SWO_GPIO_Port GPIOB
+#define ECHO_SENS__2_Pin GPIO_PIN_6
+#define ECHO_SENS__2_GPIO_Port GPIOB
+#define LED_DRIVER_Pin GPIO_PIN_8
+#define LED_DRIVER_GPIO_Port GPIOB
+/* USER CODE BEGIN Private defines */
 
-#endif /* __STM32F4xx_IT_H */
+/* USER CODE END Private defines */
 
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+*/ 
+
+#endif /* __MXCONSTANT_H */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
