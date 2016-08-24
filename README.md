@@ -18,4 +18,4 @@ RoboSec board based on the ST Nucleo64 STM32F401RE board to control HC-SR04 Ultr
 * **PA2**  - USART 2 TX
 * **PA3**  - USART 2 RX
 * **PA5**  - LD2 Board Green Led
-* **PA7**  - Light Modulation     [*TMR1 CH1 PWM*]
+* **PA11**- Light Modulation     [*TMR1 CH4 PWM*]
