@@ -3,7 +3,16 @@
 
 #include "ser_data.h"
 
-void initSerOutput();
-void sendMeasures();
+// >>>>> Public Variables
+extern SerialInput serInput1;
+// <<<<< Public Variables
+
+
+void initSerOutput( UART_HandleTypeDef* port ); // Initialize serial output
+void initSerInput( UART_HandleTypeDef* port ); // Initialize serial input
+
+void parseSerData1(); // Parse a complete string received on UART1
+
+void sendMeasures(); // Send Range Sensor Measures on UART1
 
 #endif

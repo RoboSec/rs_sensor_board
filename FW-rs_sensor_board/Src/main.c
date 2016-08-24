@@ -40,7 +40,11 @@
 
 /* USER CODE BEGIN Includes */
 #include "common.h"
+#include "leds_handler.h"
 #include "ultrasnd_handler.h"
+#include "ser_data.h"
+#include "ser_handler.h"
+#include "light_pwm_handler.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -92,9 +96,19 @@ int main(void)
 	MX_TIM11_Init();
 
 	/* USER CODE BEGIN 2 */
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
+
+	PwmStatus light;
+	light.frequency = 20000.0f; // 20 Khz
+	light.dutyCycle = 0.3f; // 30%
+	setLightPwmStatus(&light);
+
 	HAL_TIM_Base_Start_IT(&htim11); // 100 msec timer
-	initSonar( MAX_SONAR);
-	initSerOutput();
+
+	initSonar(MAX_SONAR);
+	initSerOutput(USART1);
+	initSerInput(USART1);
+
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -115,6 +129,13 @@ int main(void)
 		convertMeasures();
 		sendMeasures();
 		// <<<<< Serial Output
+
+		// >>>>> Serial Input
+		if (strAvailable1) // If complete data has been received on USART1
+		{
+			parseSerData1();
+		}
+		// <<<<< Serial Input
 
 	}
 	/* USER CODE END 3 */

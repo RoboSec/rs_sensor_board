@@ -70,6 +70,16 @@
 			<location>PARENT-2-PROJECT_LOC/Inc/leds_handler.h</location>
 		</link>
 		<link>
+			<name>Application/User/light_pwm_handler.c</name>
+			<type>1</type>
+			<location>/home/myzhar/devel/RoboSec/Firmware/rs_sensor_board/FW-rs_sensor_board/Src/light_pwm_handler.c</location>
+		</link>
+		<link>
+			<name>Application/User/light_pwm_handler.h</name>
+			<type>1</type>
+			<location>/home/myzhar/devel/RoboSec/Firmware/rs_sensor_board/FW-rs_sensor_board/Inc/light_pwm_handler.h</location>
+		</link>
+		<link>
 			<name>Application/User/main.c</name>
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/main.c</location>

@@ -7,6 +7,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim->Instance == TIM11)
 	{
+		// >>>>> LED Heart beat
 		// Heart beat led frequency: 2hz
 		static uint8_t count = 5;
 
@@ -15,9 +16,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		if (count == 0)
 		{
 			count = 5;
+
 			// Nucleo Led Blink
 			toggleLedNucleo();
 		}
+		// <<<<< LED Heart beat
 	}
 }
 
