@@ -25,7 +25,7 @@ typedef struct _ultrasnd_data_out
 	uint8_t type;				// Message type
 	uint32_t ticks;       		// ticks since system start
 	float not_valid_val;  		// value for not valid distances
-	float distances[MAX_SONAR];	// distances in meters
+	float distances[MAX_USND_SENS];	// distances in meters
 	uint16_t sonar_active; 		// Number of sonar connected;
 	uint16_t ctrl_frame_1;  	// 0x0D0A
 } UltraSndDataOut; // 20 bytes

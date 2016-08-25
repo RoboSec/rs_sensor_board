@@ -96,18 +96,25 @@ int main(void)
 	MX_TIM11_Init();
 
 	/* USER CODE BEGIN 2 */
+	// Heartbeat timer
+	HAL_TIM_Base_Start_IT(&htim11); // 100 msec timer
+
+	// Ultrasonic sensors
+	initUsndSensors(MAX_USND_SENS);
+
+	// >>>>> Serial Port 1
+	initSerOutput(&huart1);
+	initSerInput(&huart1);
+	// <<<<< Serial Port 1
+
+	// >>>>> Camera light
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
 
 	PwmStatus light;
-	light.frequency = 20000.0f; // 20 Khz
-	light.dutyCycle = 0.3f; // 30%
+	light.frequency = 2000.0f; // 20 Khz
+	light.dutyCycle = 0.0f; // 30%
 	setLightPwmStatus(&light);
-
-	HAL_TIM_Base_Start_IT(&htim11); // 100 msec timer
-
-	initSonar(MAX_SONAR);
-	initSerOutput(USART1);
-	initSerInput(USART1);
+	// <<<<< Camera Light
 
 	/* USER CODE END 2 */
 
@@ -119,9 +126,9 @@ int main(void)
 
 		/* USER CODE BEGIN 3 */
 		// >>>>> Sonar reading
-		triggerSonar( COUPLE_0_2);
+		triggerUsndSensors( COUPLE_0_2);
 		HAL_Delay(49);
-		triggerSonar( COUPLE_1_3);
+		triggerUsndSensors( COUPLE_1_3);
 		HAL_Delay(49);
 		// <<<<< Sonar reading
 

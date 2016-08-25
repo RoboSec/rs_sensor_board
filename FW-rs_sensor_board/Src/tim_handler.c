@@ -33,7 +33,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	// >>>>> Which sonar has received the echo?
 	if (htim->Instance == TIM2)
 	{
-		idx = SONAR_0;
+		idx = USND_SENS_0;
 		elapsed_tick[idx] = HAL_GetTick() - trigger_tick[COUPLE_0_2];
 
 		// Update Input Capture times
@@ -41,7 +41,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	}
 	else if (htim->Instance == TIM3)
 	{
-		idx = SONAR_1;
+		idx = USND_SENS_1;
 		elapsed_tick[idx] = HAL_GetTick() - trigger_tick[COUPLE_0_2];
 
 		// Update Input Capture times
@@ -49,7 +49,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	}
 	else if (htim->Instance == TIM4)
 	{
-		idx = SONAR_2;
+		idx = USND_SENS_2;
 		elapsed_tick[idx] = HAL_GetTick() - trigger_tick[COUPLE_1_3];
 
 		// Update Input Capture times
@@ -57,7 +57,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	}
 	else if (htim->Instance == TIM5)
 	{
-		idx = SONAR_3;
+		idx = USND_SENS_3;
 		elapsed_tick[idx] = HAL_GetTick() - trigger_tick[COUPLE_1_3];
 
 		// Update Input Capture times
