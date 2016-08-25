@@ -14,7 +14,7 @@ volatile uint32_t trigger_tick[MAX_SONAR / 2];
 volatile uint32_t elapsed_tick[MAX_SONAR];
 // <<<<< Global Variables
 
-void initSonar(int sonar_count)
+void initUsndSensors(int sonar_count)
 {
 	int i = 0;
 	for (i = 0; i < MAX_SONAR; i++)
@@ -44,7 +44,7 @@ void initSonar(int sonar_count)
 	// <<<<< Enable interrupt to receive Echoes
 }
 
-void triggerSonar(int couple)
+void triggerUsndSensors(int couple)
 {
 	// Note: in this version the trigger is "manual", no
 	//       timer is used to generate the pulse

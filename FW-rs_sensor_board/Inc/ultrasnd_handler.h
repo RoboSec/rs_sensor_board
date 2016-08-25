@@ -29,13 +29,13 @@ extern volatile uint32_t elapsed_tick[MAX_SONAR];
  *
  * @param sonar_count the number of sonars connected to the board
  */
-void initSonar( int sonar_count );
+void initUsndSensors( int sonar_count );
 
 /*! brief Emits trigger for a couple of sonars
  *
  * @param couple a couple of sonars [@ref COUPLE_0_2 or @ref COUPLE_1_3]
  */
-void triggerSonar( int couple );
+void triggerUsndSensors( int couple );
 
 /*! brief Updates @ref times vector on Input Capture interrupt
  */
