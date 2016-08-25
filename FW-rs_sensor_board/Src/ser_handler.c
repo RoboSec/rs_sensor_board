@@ -74,7 +74,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 			memset(serInput1.in_buffer, 0, IN_BUF_SIZE);
 		}
 
-		if (serInput1.lastByte == 0xA5 && serInput1.in_started == 0) // First Byte
+		if (serInput1.lastByte == 0x5A && serInput1.in_started == 0) // First Byte
 		{
 			serInput1.in_idx = 0;
 			serInput1.in_started = 1;
@@ -115,15 +115,6 @@ void parseSerData1()
 	// Reset flag
 	strAvailable1 = 0;
 
-	// >>>>> Data size control
-	uint8_t dataSize = strlen((char*) lastRecStr1);
-
-	if (dataSize != (lastRecStr1[2] + 3))
-	{
-		return; // Wrong size
-	}
-	// <<<<< Data size control
-
 	uint8_t type = lastRecStr1[3];
 
 	if (type == MSG_PWM) // PWM Setting
@@ -139,9 +130,9 @@ void parseSerData1()
 		// <<<<< Redundancy control
 
 		// >>>>> Data size control
-		int dataSize = strlen((char*) lastRecStr1);
+		uint8_t dataSize = sizeof(PwmData)-3;
 
-		if (dataSize != pwm->byte_count + 3)
+		if (dataSize != (lastRecStr1[2]))
 		{
 			return; // Wrong size
 		}

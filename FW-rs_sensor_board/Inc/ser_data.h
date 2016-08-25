@@ -37,8 +37,9 @@ typedef struct _pwm_data
 	uint8_t type;			// Message type
 	float frequency;  		// Frequency of the PWM
 	float dutyCycle;   		// Duty Cycle
+	uint16_t dummy_word;	// Dummy word to get 4 bytes alignment
 	uint16_t ctrl_frame_1;  // 0x0D0A
-} PwmData; // 14 bytes
+} PwmData; // 16 bytes
 
 typedef struct _serial_input
 {
