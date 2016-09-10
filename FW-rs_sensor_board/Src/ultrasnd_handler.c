@@ -34,7 +34,7 @@ void initUsndSensors(int sonar_count)
 
 	// >>>>> Enable interrupt to receive Echoes
 	if (sonarCount >= 1)
-		HAL_TIM_IC_Start_IT(&htim2, TIM_CHANNEL_2);
+		HAL_TIM_IC_Start_IT(&htim9, TIM_CHANNEL_1);
 	if (sonarCount >= 2)
 		HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_2);
 	if (sonarCount >= 3)

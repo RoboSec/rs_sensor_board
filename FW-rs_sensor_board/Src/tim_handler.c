@@ -31,13 +31,13 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	uint32_t ic_val = 0;
 
 	// >>>>> Which sonar has received the echo?
-	if (htim->Instance == TIM2)
+	if (htim->Instance == TIM9)
 	{
 		idx = USND_SENS_0;
 		elapsed_tick[idx] = HAL_GetTick() - trigger_tick[COUPLE_0_2];
 
 		// Update Input Capture times
-		ic_val = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2);
+		ic_val = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
 	}
 	else if (htim->Instance == TIM3)
 	{
