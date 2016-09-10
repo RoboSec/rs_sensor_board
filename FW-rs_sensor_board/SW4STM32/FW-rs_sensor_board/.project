@@ -141,6 +141,16 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Src/usart.c</locationURI>
 		</link>
 		<link>
+			<name>Application/User/ws2812.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/ws2812.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/ws2812.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Inc/ws2812.h</locationURI>
+		</link>
+		<link>
 			<name>Drivers/CMSIS/system_stm32f4xx.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c</locationURI>
