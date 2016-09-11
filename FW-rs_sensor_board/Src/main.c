@@ -119,6 +119,7 @@ int main(void)
 
 	// >>>>> WS2812 RGB Led
 	ws2812_init();
+	setWHOLEcolor( 200,0,0 );
 	// <<<<< WS2812 RGB Led
 
   /* USER CODE END 2 */
