@@ -32,6 +32,7 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
+#include "dma.h"
 #include "i2c.h"
 #include "tim.h"
 #include "usart.h"
@@ -44,6 +45,7 @@
 #include "ser_data.h"
 #include "ser_handler.h"
 #include "light_pwm_handler.h"
+#include "ws2812_handler.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -83,6 +85,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_I2C3_Init();
   MX_TIM1_Init();
   MX_TIM3_Init();
@@ -91,6 +94,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_TIM11_Init();
   MX_TIM9_Init();
+  MX_TIM2_Init();
 
   /* USER CODE BEGIN 2 */
 	// Heartbeat timer
@@ -112,6 +116,10 @@ int main(void)
 	light.dutyCycle = 0.0f; // 30%
 	setLightPwmStatus(&light);
 	// <<<<< Camera Light
+
+	// >>>>> WS2812 RGB Led
+	ws2812_init();
+	// <<<<< WS2812 RGB Led
 
   /* USER CODE END 2 */
 

@@ -37,7 +37,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 		elapsed_tick[idx] = HAL_GetTick() - trigger_tick[COUPLE_0_2];
 
 		// Update Input Capture times
-		ic_val = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
+		ic_val = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2);
 	}
 	else if (htim->Instance == TIM3)
 	{
