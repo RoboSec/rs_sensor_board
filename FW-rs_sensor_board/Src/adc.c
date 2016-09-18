@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * File Name          : USART.c
+  * File Name          : ADC.c
   * Description        : This file provides code for the configuration
-  *                      of the USART instances.
+  *                      of the ADC instances.
   ******************************************************************************
   *
   * COPYRIGHT(c) 2016 STMicroelectronics
@@ -33,7 +33,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "usart.h"
+#include "adc.h"
 
 #include "gpio.h"
 
@@ -41,84 +41,89 @@
 
 /* USER CODE END 0 */
 
-UART_HandleTypeDef huart1;
+ADC_HandleTypeDef hadc1;
 
-/* USART1 init function */
-
-void MX_USART1_UART_Init(void)
+/* ADC1 init function */
+void MX_ADC1_Init(void)
 {
+  ADC_ChannelConfTypeDef sConfig;
 
-  huart1.Instance = USART1;
-  huart1.Init.BaudRate = 115200;
-  huart1.Init.WordLength = UART_WORDLENGTH_8B;
-  huart1.Init.StopBits = UART_STOPBITS_1;
-  huart1.Init.Parity = UART_PARITY_NONE;
-  huart1.Init.Mode = UART_MODE_TX_RX;
-  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
-  if (HAL_UART_Init(&huart1) != HAL_OK)
+    /**Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion) 
+    */
+  hadc1.Instance = ADC1;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
+  hadc1.Init.Resolution = ADC_RESOLUTION_12B;
+  hadc1.Init.ScanConvMode = DISABLE;
+  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.DiscontinuousConvMode = DISABLE;
+  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+  hadc1.Init.NbrOfConversion = 1;
+  hadc1.Init.DMAContinuousRequests = DISABLE;
+  hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+  if (HAL_ADC_Init(&hadc1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+    /**Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time. 
+    */
+  sConfig.Channel = ADC_CHANNEL_10;
+  sConfig.Rank = 1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     Error_Handler();
   }
 
 }
 
-void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
+void HAL_ADC_MspInit(ADC_HandleTypeDef* adcHandle)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct;
-  if(uartHandle->Instance==USART1)
+  if(adcHandle->Instance==ADC1)
   {
-  /* USER CODE BEGIN USART1_MspInit 0 */
+  /* USER CODE BEGIN ADC1_MspInit 0 */
 
-  /* USER CODE END USART1_MspInit 0 */
+  /* USER CODE END ADC1_MspInit 0 */
     /* Peripheral clock enable */
-    __HAL_RCC_USART1_CLK_ENABLE();
+    __HAL_RCC_ADC1_CLK_ENABLE();
   
-    /**USART1 GPIO Configuration    
-    PA9     ------> USART1_TX
-    PA10     ------> USART1_RX 
+    /**ADC1 GPIO Configuration    
+    PC0     ------> ADC1_IN10 
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_10;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_PULLUP;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStruct.Alternate = GPIO_AF7_USART1;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    GPIO_InitStruct.Pin = AN_LIGHT_SENSOR_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(AN_LIGHT_SENSOR_GPIO_Port, &GPIO_InitStruct);
 
-    /* Peripheral interrupt init */
-    HAL_NVIC_SetPriority(USART1_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(USART1_IRQn);
-  /* USER CODE BEGIN USART1_MspInit 1 */
+  /* USER CODE BEGIN ADC1_MspInit 1 */
 
-  /* USER CODE END USART1_MspInit 1 */
+  /* USER CODE END ADC1_MspInit 1 */
   }
 }
 
-void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
+void HAL_ADC_MspDeInit(ADC_HandleTypeDef* adcHandle)
 {
 
-  if(uartHandle->Instance==USART1)
+  if(adcHandle->Instance==ADC1)
   {
-  /* USER CODE BEGIN USART1_MspDeInit 0 */
+  /* USER CODE BEGIN ADC1_MspDeInit 0 */
 
-  /* USER CODE END USART1_MspDeInit 0 */
+  /* USER CODE END ADC1_MspDeInit 0 */
     /* Peripheral clock disable */
-    __HAL_RCC_USART1_CLK_DISABLE();
+    __HAL_RCC_ADC1_CLK_DISABLE();
   
-    /**USART1 GPIO Configuration    
-    PA9     ------> USART1_TX
-    PA10     ------> USART1_RX 
+    /**ADC1 GPIO Configuration    
+    PC0     ------> ADC1_IN10 
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_9|GPIO_PIN_10);
-
-    /* Peripheral interrupt Deinit*/
-    HAL_NVIC_DisableIRQ(USART1_IRQn);
+    HAL_GPIO_DeInit(AN_LIGHT_SENSOR_GPIO_Port, AN_LIGHT_SENSOR_Pin);
 
   }
-  /* USER CODE BEGIN USART1_MspDeInit 1 */
+  /* USER CODE BEGIN ADC1_MspDeInit 1 */
 
-  /* USER CODE END USART1_MspDeInit 1 */
+  /* USER CODE END ADC1_MspDeInit 1 */
 } 
 
 /* USER CODE BEGIN 1 */

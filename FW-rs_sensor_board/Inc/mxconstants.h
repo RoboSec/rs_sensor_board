@@ -43,10 +43,14 @@
 
 #define B1_Pin GPIO_PIN_13
 #define B1_GPIO_Port GPIOC
-#define ECHO_SENS__0_Pin GPIO_PIN_0
-#define ECHO_SENS__0_GPIO_Port GPIOA
+#define AN_LIGHT_SENSOR_Pin GPIO_PIN_0
+#define AN_LIGHT_SENSOR_GPIO_Port GPIOC
+#define LED_DRIVER_Pin GPIO_PIN_0
+#define LED_DRIVER_GPIO_Port GPIOA
 #define ECHO_SENS__3_Pin GPIO_PIN_1
 #define ECHO_SENS__3_GPIO_Port GPIOA
+#define ECHO_SENS__0_Pin GPIO_PIN_2
+#define ECHO_SENS__0_GPIO_Port GPIOA
 #define STATUS_LED_Pin GPIO_PIN_5
 #define STATUS_LED_GPIO_Port GPIOA
 #define ECHO_SENS__1_Pin GPIO_PIN_6
@@ -65,8 +69,6 @@
 #define SWO_GPIO_Port GPIOB
 #define ECHO_SENS__2_Pin GPIO_PIN_6
 #define ECHO_SENS__2_GPIO_Port GPIOB
-#define LED_DRIVER_Pin GPIO_PIN_8
-#define LED_DRIVER_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

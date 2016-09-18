@@ -32,6 +32,7 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
+#include "adc.h"
 #include "dma.h"
 #include "i2c.h"
 #include "tim.h"
@@ -95,6 +96,7 @@ int main(void)
   MX_TIM11_Init();
   MX_TIM9_Init();
   MX_TIM2_Init();
+  MX_ADC1_Init();
 
   /* USER CODE BEGIN 2 */
 	// Heartbeat timer

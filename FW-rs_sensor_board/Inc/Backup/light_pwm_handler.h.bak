@@ -14,8 +14,7 @@ extern PwmStatus pwmStatus;
 // <<<<< Public Variables
 
 // >>>>> Public Functions
-void setLightPwmFrequency(float freq);
-void setLightPwmDutyCycle(float duty);
+void setLightPwmStatus( PwmStatus* status );
 // <<<<< Public Functions
 
 #endif //LIGHT_PWM_HANDLER_H_
