@@ -19,6 +19,11 @@ RoboSec board based on the ST Nucleo64 STM32F401RE board to control HC-SR04 Ultr
 | **PA5**     |LD2 Board Green Led 	|																																		|
 | **PA11**    |Light Modulation    	| [*TMR1 CH4 PWM*]																									|
 | **PC0**     |Ambient Light Sensor	| [*ADC1 IN10*]																											|
-| **PC1-10**	|Optional I/O					|	10 x [*GPIO STANDARD*]																						|
+| **PC1-10**	|GPIO[0-9]					  |	10 x [*GPIO STANDARD*]																						|
+| **PB8**     |I2C_SCL              | [*I2C1 Clock*]                                                    |
+| **PB9**     |I2C_SDA              | [*I2C1 Data*]                                                     |
+| **PA3**     |AN_IN0               | [*ADC1 IN3*]																											|
+| **PA4**     |AN_IN1     	        | [*ADC1 IN4*]																											|
+| **PA7**     |AN_IN2     	        | [*ADC1 IN7*]																											|
 
 **NOTE**: Open the pads **SB13** and **SB14**, close the pads **SB62** and **SB63** in order to enable the pins **PA2** and **PA3** on the Morpho connector of the Nucleo Board (see pg 24 of the "UM1724 - User manual" document)
