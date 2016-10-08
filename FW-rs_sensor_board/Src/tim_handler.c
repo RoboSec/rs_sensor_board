@@ -1,4 +1,6 @@
 #include "tim_handler.h"
+
+#include "tim.h"
 #include "leds_handler.h"
 #include "ultrasnd_handler.h"
 

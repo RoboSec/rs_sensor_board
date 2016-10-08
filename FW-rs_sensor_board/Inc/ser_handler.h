@@ -2,6 +2,7 @@
 #define SER_HANDLER_H_
 
 #include "ser_data.h"
+#include "tim.h"
 
 // >>>>> Public Variables
 extern SerialInput serInput1;

@@ -1,6 +1,7 @@
 #ifndef ULTRASND_HANDLER_H
 #define ULTRASND_HANDLER_H
-#include "tim.h"
+
+#include "common.h"
 
 #define MAX_DURATION_10_USEC 2500 ///< Max duration of the echo: 25 msec -> about 4 m
 

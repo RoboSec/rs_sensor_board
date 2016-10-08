@@ -1,93 +1,150 @@
 #include "ws2812_handler.h"
-#include "common.h"
 
-// >>>>> Private Variables
-static uint8_t LEDbuffer[LED_BUFFER_SIZE];
-// <<<<< Private Variables
+#include "tim.h"
 
-void ws2812_init(void)
+#define H_VAL 70
+#define L_VAL 35
+#define BITS_PER_LED (3*8)
+#define BIT_BUF_SIZE (((N_LEDS+1) * BITS_PER_LED) ) // Added a "virtual led" to avoid PWM to generate false bits
+
+uint32_t ws2812BitBuf[BIT_BUF_SIZE];
+
+void ws2812_initLeds()
 {
-	HAL_TIM_PWM_Start_DMA(&htim2, TIM_CHANNEL_1, (uint32_t *) LEDbuffer,
-	LED_BUFFER_SIZE);
+	for (int i = 0; i < BIT_BUF_SIZE; i++)
+		ws2812BitBuf[i] = 0;
+
+	ws2812_turnOffLeds();
 }
 
-void setLEDcolor(uint32_t LEDnumber, uint8_t RED, uint8_t GREEN, uint8_t BLUE)
+void ws2812_turnOffLeds()
 {
-	uint8_t tempBuffer[24];
-	uint32_t i;
-	uint32_t LEDindex;
-	LEDindex = LEDnumber % LED_NUMBER;
+	for (int i = 0; i < N_LEDS; i++)
+		ws2812_setColor(i, BLACK);
 
-	for (i = 0; i < 8; i++) // GREEN data
-		tempBuffer[i] = ((GREEN << i) & 0x80) ? WS2812_1 : WS2812_0;
-	for (i = 0; i < 8; i++) // RED
-		tempBuffer[8 + i] = ((RED << i) & 0x80) ? WS2812_1 : WS2812_0;
-	for (i = 0; i < 8; i++) // BLUE
-		tempBuffer[16 + i] = ((BLUE << i) & 0x80) ? WS2812_1 : WS2812_0;
-
-	for (i = 0; i < 24; i++)
-		LEDbuffer[RESET_SLOTS_BEGIN + LEDindex * 24 + i] = tempBuffer[i];
+	ws2812_applyColors();
 }
 
-void setWHOLEcolor(uint8_t RED, uint8_t GREEN, uint8_t BLUE)
+void ws2812_setColor(int ledIdx, const uint8_t *color)
 {
-	uint32_t index;
+	if (ledIdx >= N_LEDS)
+		return;
 
-	for (index = 0; index < LED_NUMBER; index++)
-		setLEDcolor(index, RED, GREEN, BLUE);
-}
+	uint8_t r = color[0];
+	uint8_t g = color[1];
+	uint8_t b = color[2];
 
-void fillBufferBlack(void)
-{
-	/*Fill LED buffer - ALL OFF*/
-	uint32_t index, buffIndex;
-	buffIndex = 0;
-
-	for (index = 0; index < RESET_SLOTS_BEGIN; index++)
+	int i = ledIdx * BITS_PER_LED;
+	uint8_t mask;
+	mask = 0x80;
+	while (mask)
 	{
-		LEDbuffer[buffIndex] = WS2812_RESET;
-		buffIndex++;
+		ws2812BitBuf[i] = (mask & g) ? H_VAL : L_VAL;
+		mask >>= 1;
+		i++;
 	}
-	for (index = 0; index < LED_DATA_SIZE; index++)
+	mask = 0x80;
+	while (mask)
 	{
-		LEDbuffer[buffIndex] = WS2812_0;
-		buffIndex++;
+		ws2812BitBuf[i] = (mask & r) ? H_VAL : L_VAL;
+		mask >>= 1;
+		i++;
 	}
-	LEDbuffer[buffIndex] = WS2812_0;
-	buffIndex++;
-	for (index = 0; index < RESET_SLOTS_END; index++)
+	mask = 0x80;
+	while (mask)
 	{
-		LEDbuffer[buffIndex] = 0;
-		buffIndex++;
+		ws2812BitBuf[i] = (mask & b) ? H_VAL : L_VAL;
+		mask >>= 1;
+		i++;
 	}
 }
 
-void fillBufferWhite(void)
+void ws2812_applyColors()
 {
-	/*Fill LED buffer - ALL OFF*/
-	uint32_t index, buffIndex;
-	buffIndex = 0;
-
-	for (index = 0; index < RESET_SLOTS_BEGIN; index++)
-	{
-		LEDbuffer[buffIndex] = WS2812_RESET;
-		buffIndex++;
-	}
-	for (index = 0; index < LED_DATA_SIZE; index++)
-	{
-		LEDbuffer[buffIndex] = WS2812_1;
-		buffIndex++;
-	}
-	LEDbuffer[buffIndex] = WS2812_0;
-	buffIndex++;
-	for (index = 0; index < RESET_SLOTS_END; index++)
-	{
-		LEDbuffer[buffIndex] = 0;
-		buffIndex++;
-	}
+	HAL_TIM_PWM_Start_DMA(&htim2, TIM_CHANNEL_1, (uint32_t*) ws2812BitBuf,
+			sizeof(ws2812BitBuf) / sizeof(ws2812BitBuf[0]));
 }
 
-void TIMx_DMA_IRQHandler(void)
+void ws2812_fadeEffect( int maxLevel  )
 {
-	HAL_DMA_IRQHandler(htim2.hdma[TIM_DMA_ID_CC1]);
+	for (int t = 0; t < maxLevel; t++)
+	{
+		for (int i = 0; i < N_LEDS; i++)
+		{
+			uint8_t color[] =
+			{ t, 0, 0 };
+			ws2812_setColor(i, color);
+		}
+
+		ws2812_applyColors();
+		HAL_Delay(2); //*/
+	}
+
+	for (int t = maxLevel; t != 0; t--)
+	{
+		for (int i = 0; i < N_LEDS; i++)
+		{
+			uint8_t color[] =
+			{ t, 0, 0 };
+			ws2812_setColor(i, color);
+		}
+
+		ws2812_applyColors();
+		HAL_Delay(2); //*/
+	}
+
+	for (int t = 0; t < maxLevel; t++)
+	{
+		for (int i = 0; i < N_LEDS; i++)
+		{
+			uint8_t color[] =
+			{ 0, t, 0 };
+			ws2812_setColor(i, color);
+		}
+
+		ws2812_applyColors();
+		HAL_Delay(2); //*/
+	}
+
+	for (int t = maxLevel; t != 0; t--)
+	{
+		for (int i = 0; i < N_LEDS; i++)
+		{
+			uint8_t color[] =
+			{ 0, t, 0 };
+			ws2812_setColor(i, color);
+		}
+
+		ws2812_applyColors();
+		HAL_Delay(2); //*/
+	}
+
+	for (int t = 0; t < maxLevel; t++)
+	{
+		for (int i = 0; i < N_LEDS; i++)
+		{
+			uint8_t color[] =
+			{ 0, 0, t };
+			ws2812_setColor(i, color);
+		}
+
+		ws2812_applyColors();
+		HAL_Delay(2); //*/
+	}
+
+	for (int t = maxLevel; t != 0; t--)
+	{
+		for (int i = 0; i < N_LEDS; i++)
+		{
+			uint8_t color[] =
+			{ 0, 0, t };
+			ws2812_setColor(i, color);
+		}
+
+		ws2812_applyColors();
+		HAL_Delay(2); //*/
+	}
+
+	ws2812_turnOffLeds();
 }
+

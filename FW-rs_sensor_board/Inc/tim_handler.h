@@ -1,7 +1,5 @@
-#ifndef _TIM_HANDLER_H_
-#define _TIM_HANDLER_H_
-#include "tim.h"
-
+#ifndef TIM_HANDLER_H_
+#define TIM_HANDLER_H_
 
 
 

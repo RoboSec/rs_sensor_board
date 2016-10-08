@@ -1,27 +1,53 @@
 #ifndef WS2812_HANDLER_H
 #define WS2812_HANDLER_H
 
-#include "stm32f4xx_hal.h"
-#include "tim.h"
+#include "common.h"
 
-#define TIMER_PERIOD			(htim2.Init.Period)
+#define MAX(a,b) ((a>b)?a:b)
+#define MIN(a,b) ((a<b)?a:b)
 
-#define LED_NUMBER				(8)					// how many LEDs the MCU should control?
-#define LED_DATA_SIZE			(LED_NUMBER * 24)
-#define RESET_SLOTS_BEGIN		(50)
-#define RESET_SLOTS_END			(50)
-#define WS2812_LAST_SLOT		(1)
-#define LED_BUFFER_SIZE			(RESET_SLOTS_BEGIN + LED_DATA_SIZE + WS2812_LAST_SLOT + RESET_SLOTS_END)
-#define WS2812_0				(TIMER_PERIOD / 3)			// WS2812's zero high time is long about one third of the period
-#define WS2812_1				(TIMER_PERIOD * 2 / 3)		// WS2812's one high time is long about two thirds of the period
-#define WS2812_RESET			(0)
+// >>>>> Public functions
+void ws2812_initLeds();
+
+void ws2812_setColor(int ledIdx, const uint8_t *color);
+void ws2812_applyColors();
+void ws2812_turnOffLeds();
+
+void ws2812_fadeEffect( int maxLevel );
+// <<<<< Public functions
+
+// >>>>> Color definitions
+#define	OFF		0
+#define FULL	255
+#define MID		150
+#define SOFT	15
+static const uint8_t BLACK[] =
+{ OFF, OFF, OFF };
+static const uint8_t RED[] =
+{ FULL, OFF, OFF };
+static const uint8_t GREEN[] =
+{ OFF, FULL, OFF };
+static const uint8_t BLUE[] =
+{ OFF, OFF, FULL };
+static const uint8_t WHITE[] =
+{ FULL, FULL, FULL };
+static const uint8_t SOFT_WHITE[] =
+{ SOFT, SOFT, SOFT };
+static const uint8_t MID_WHITE[] =
+{ MID, MID, MID };
+static const uint8_t MID_RED[] =
+{ MID, OFF, OFF };
+static const uint8_t MID_GREEN[] =
+{ OFF, MID, OFF };
+static const uint8_t MID_BLUE[] =
+{ OFF, OFF, MID };
+static const uint8_t SOFT_RED[] =
+{ SOFT, OFF, OFF };
+static const uint8_t SOFT_GREEN[] =
+{ OFF, SOFT, OFF };
+static const uint8_t SOFT_BLUE[] =
+{ OFF, OFF, SOFT };
+// <<<<< Color definitions
 
 
-// >>>>> Public Functions
-void ws2812_init(void);
-void setLEDcolor(uint32_t LEDnumber, uint8_t RED, uint8_t GREEN, uint8_t BLUE);
-void setWHOLEcolor(uint8_t RED, uint8_t GREEN, uint8_t BLUE);
-void fillBufferBlack(void);
-void fillBufferWhite(void);
-// <<<<< Public Functions
 #endif

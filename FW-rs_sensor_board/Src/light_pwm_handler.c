@@ -1,5 +1,7 @@
 #include "light_pwm_handler.h"
 
+#include "tim.h"
+
 // >>>>> Public Variables
 PwmStatus pwmStatus;
 // <<<<< Public Variables
