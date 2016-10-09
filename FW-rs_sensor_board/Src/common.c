@@ -23,7 +23,7 @@ void sonarLedColors()
 			float val = distances[i] / 4.0f * (float)ledbarMaxValue;
 
 			uint8_t green = (uint8_t) val;
-			uint8_t red = ledbarMaxValue - red;
+			uint8_t red = ledbarMaxValue - green;
 
 			color[0] = red;
 			color[1] = green;

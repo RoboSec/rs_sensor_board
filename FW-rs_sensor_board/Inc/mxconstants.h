@@ -89,8 +89,8 @@
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
 #define TCK_GPIO_Port GPIOA
-#define GPIO_9_Pin GPIO_PIN_10
-#define GPIO_9_GPIO_Port GPIOC
+#define SOUND_AMPLI_EN_Pin GPIO_PIN_10
+#define SOUND_AMPLI_EN_GPIO_Port GPIOC
 #define SWO_Pin GPIO_PIN_3
 #define SWO_GPIO_Port GPIOB
 #define ECHO_SENS__2_Pin GPIO_PIN_6
