@@ -6,6 +6,8 @@
 
 #define N_LEDS (8)
 
+extern uint8_t ledbarMaxValue;
+
 void delayUS( uint32_t uSec );
 void sonarLedColors();
 

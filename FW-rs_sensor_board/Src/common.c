@@ -3,6 +3,8 @@
 #include "ultrasnd_handler.h"
 #include "ws2812_handler.h"
 
+uint8_t ledbarMaxValue=100;
+
 void delayUS(uint32_t us)
 {
 	volatile uint32_t counter = 12 * us;
@@ -18,10 +20,10 @@ void sonarLedColors()
 
 		if (distances[i] != RANGE_NOT_VALID)
 		{
-			float val = distances[i] / 4.0f * 255.0f;
+			float val = distances[i] / 4.0f * (float)ledbarMaxValue;
 
 			uint8_t green = (uint8_t) val;
-			uint8_t red = 255 - red;
+			uint8_t red = ledbarMaxValue - red;
 
 			color[0] = red;
 			color[1] = green;

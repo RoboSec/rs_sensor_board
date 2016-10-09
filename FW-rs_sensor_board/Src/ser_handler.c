@@ -130,7 +130,7 @@ void parseSerData1()
 		// <<<<< Redundancy control
 
 		// >>>>> Data size control
-		uint8_t dataSize = sizeof(PwmData)-3;
+		uint8_t dataSize = sizeof(PwmData) - 3;
 
 		if (dataSize != (lastRecStr1[2]))
 		{
@@ -144,5 +144,26 @@ void parseSerData1()
 
 		setLightPwmStatus(&newStatus);
 	}
+	else if (type == MSG_MAX_LEDBAR_VAL)
+	{
+		LedBarData* data = (LedBarData*) lastRecStr1;
 
+		// >>>>> Redundancy control
+		if (data->ctrl_frame_0 != CTRL_WORD_0 || data->ctrl_frame_1 != CTRL_WORD_1)
+		{
+			return; // data not correct
+		}
+		// <<<<< Redundancy control
+
+		// >>>>> Data size control
+		uint8_t dataSize = sizeof(LedBarData) - 3;
+
+		if (dataSize != (lastRecStr1[2]))
+		{
+			return; // Wrong size
+		}
+		// <<<<< Data size control
+
+		ledbarMaxValue = data->ledMaxValUSnd;
+	}
 }
