@@ -12,6 +12,8 @@ extern PwmStatus pwmStatus;
 // <<<<< Public Variables
 
 // >>>>> Public Functions
+void initLightPwm();
+void lightPwmBootTest();
 void setLightPwmStatus( PwmStatus* status );
 // <<<<< Public Functions
 
