@@ -20,19 +20,21 @@ void lightPwmBootTest()
 {
 	for (int i = 0; i < 100; i++)
 	{
-		float duty = (float) i * 0.1f;
+		float duty = (float) i * 0.01f;
 		setLightPwmDutyCycle(duty);
 
-		HAL_Delay(5);
+		HAL_Delay(10);
 	}
 
 	for (int i = 100; i != 0; i--)
 	{
-		float duty = (float) i * 0.1f;
+		float duty = (float) i * 0.01f;
 		setLightPwmDutyCycle(duty);
 
-		HAL_Delay(5);
+		HAL_Delay(10);
 	}
+
+	setLightPwmDutyCycle(0.0f);
 }
 
 void setLightPwmStatus(PwmStatus* status)

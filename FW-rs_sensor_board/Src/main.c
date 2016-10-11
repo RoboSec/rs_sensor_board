@@ -113,7 +113,7 @@ int main(void)
 	initLightPwm();
 
 	PwmStatus light;
-	light.frequency = 2000.0f; // 20 Khz
+	light.frequency = 1000.0f; // 1 Khz
 	light.dutyCycle = 0.0f; // 30%
 	setLightPwmStatus(&light);
 
@@ -124,6 +124,9 @@ int main(void)
 	ws2812_initLeds();
 	ws2812_fadeEffect(100);
 	// <<<<< WS2812 RGB Led
+
+	// >>>>> Sound amplifier enable
+	HAL_GPIO_WritePin( SOUND_AMPLI_EN_GPIO_Port, SOUND_AMPLI_EN_Pin, GPIO_PIN_SET );
 
 	/* USER CODE END 2 */
 
