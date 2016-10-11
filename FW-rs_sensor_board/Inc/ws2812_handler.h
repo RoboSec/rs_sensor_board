@@ -13,7 +13,7 @@ void ws2812_setColor(int ledIdx, const uint8_t *color);
 void ws2812_applyColors();
 void ws2812_turnOffLeds();
 
-void ws2812_fadeEffect( int maxLevel );
+void ws2812_fadeEffect( uint8_t maxLevel );
 // <<<<< Public functions
 
 // >>>>> Color definitions

@@ -3,7 +3,7 @@
 #include "ultrasnd_handler.h"
 #include "ws2812_handler.h"
 
-uint8_t ledbarMaxValue=100;
+uint8_t ledbarMaxValue = 100;
 
 void delayUS(uint32_t us)
 {

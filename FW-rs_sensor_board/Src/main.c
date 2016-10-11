@@ -122,7 +122,7 @@ int main(void)
 
 	// >>>>> WS2812 RGB Led
 	ws2812_initLeds();
-	ws2812_fadeEffect(255);
+	ws2812_fadeEffect(100);
 	// <<<<< WS2812 RGB Led
 
 	/* USER CODE END 2 */

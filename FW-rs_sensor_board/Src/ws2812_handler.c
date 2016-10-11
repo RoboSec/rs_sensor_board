@@ -1,9 +1,10 @@
 #include "ws2812_handler.h"
 
 #include "tim.h"
+#include "math.h"
 
-#define H_VAL 70
-#define L_VAL 35
+#define H_VAL 75
+#define L_VAL 30
 #define BITS_PER_LED (3*8)
 #define BIT_BUF_SIZE (((N_LEDS+1) * BITS_PER_LED) ) // Added a "virtual led" to avoid PWM to generate false bits
 
@@ -65,8 +66,10 @@ void ws2812_applyColors()
 			sizeof(ws2812BitBuf) / sizeof(ws2812BitBuf[0]));
 }
 
-void ws2812_fadeEffect( int maxLevel  )
+void ws2812_fadeEffect( uint8_t maxLevel  )
 {
+	uint32_t delay = (uint32_t)(ceilf(255.0/maxLevel)*2.0f);
+
 	for (int t = 0; t < maxLevel; t++)
 	{
 		for (int i = 0; i < N_LEDS; i++)
@@ -77,7 +80,7 @@ void ws2812_fadeEffect( int maxLevel  )
 		}
 
 		ws2812_applyColors();
-		HAL_Delay(2); //*/
+		HAL_Delay(delay); //*/
 	}
 
 	for (int t = maxLevel; t != 0; t--)
@@ -90,7 +93,7 @@ void ws2812_fadeEffect( int maxLevel  )
 		}
 
 		ws2812_applyColors();
-		HAL_Delay(2); //*/
+		HAL_Delay(delay); //*/
 	}
 
 	for (int t = 0; t < maxLevel; t++)
@@ -103,7 +106,7 @@ void ws2812_fadeEffect( int maxLevel  )
 		}
 
 		ws2812_applyColors();
-		HAL_Delay(2); //*/
+		HAL_Delay(delay); //*/
 	}
 
 	for (int t = maxLevel; t != 0; t--)
@@ -116,7 +119,7 @@ void ws2812_fadeEffect( int maxLevel  )
 		}
 
 		ws2812_applyColors();
-		HAL_Delay(2); //*/
+		HAL_Delay(delay); //*/
 	}
 
 	for (int t = 0; t < maxLevel; t++)
@@ -129,7 +132,7 @@ void ws2812_fadeEffect( int maxLevel  )
 		}
 
 		ws2812_applyColors();
-		HAL_Delay(2); //*/
+		HAL_Delay(delay); //*/
 	}
 
 	for (int t = maxLevel; t != 0; t--)
@@ -142,7 +145,7 @@ void ws2812_fadeEffect( int maxLevel  )
 		}
 
 		ws2812_applyColors();
-		HAL_Delay(2); //*/
+		HAL_Delay(delay); //*/
 	}
 
 	ws2812_turnOffLeds();
