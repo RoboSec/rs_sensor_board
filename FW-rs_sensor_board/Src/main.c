@@ -113,7 +113,7 @@ int main(void)
 	initLightPwm();
 
 	PwmStatus light;
-	light.frequency = 1000.0f; // 1 Khz
+	light.frequency = 400.0f; // 1 Khz
 	light.dutyCycle = 0.0f; // 30%
 	setLightPwmStatus(&light);
 
