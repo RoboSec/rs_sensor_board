@@ -19,7 +19,8 @@ RoboSec board based on the ST Nucleo64 STM32F401RE board to control HC-SR04 Ultr
 | **PA5**     |LD2 Board Green Led 	|																																		|
 | **PA11**    |Light Modulation    	| [*TMR1 CH4 PWM*]																									|
 | **PC0**     |Ambient Light Sensor	| [*ADC1 IN10*]																											|
-| **PC1-10**	|GPIO[0-9]					  |	10 x [*GPIO STANDARD*]																						|
+| **PC1-9**	  |GPIO[0-8]					  |	9 x [*GPIO STANDARD*]																						  |
+| **PC10**    |Sound Ampliefier EN  | [*GPIO STANDARD*] - *Default HIGH*                                |
 | **PB8**     |I2C_SCL              | [*I2C1 Clock*]                                                    |
 | **PB9**     |I2C_SDA              | [*I2C1 Data*]                                                     |
 | **PA3**     |AN_IN0               | [*ADC1 IN3*]																											|
